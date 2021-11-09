@@ -17,26 +17,6 @@ function getTimes(text) {
         }
     })
     return number;
-
-    // let pos = splitText.indexOf("hr")
-    // if (pos > -1) {
-    //     number = splitText[pos-1]
-    //     unit = 60 * 60;
-    // }
-    // pos = splitText.indexOf("mins")
-    // if (pos > -1) {
-    //     number = splitText[pos-1]
-    //      unit = 60;
-    // }
-    // pos = splitText.indexOf("sec")
-    // if (pos > -1) {
-    //     number = splitText[pos-1]
-    //      unit = 1;
-    // }
-    // console.log(text.indexOf("second"))
-    // console.log(text.indexOf("hour"))
-    // console.log(text.indexOf("hr"))
-
 }
 
 
