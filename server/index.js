@@ -15,7 +15,6 @@ app.get("/recipe", async (req, res) => {
   try {
     const url = req.query.url;
     const data = await scraper(url);
-    console.log(data);
     res.send(data).status(200)
   } catch (error) {
     console.log(error)
