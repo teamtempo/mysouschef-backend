@@ -12,7 +12,6 @@ app.get("/", (req,res) => {
   res.send("Server is running").status(200)
 })
 
-// enter a supported recipe url as a parameter - returns a promise
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
@@ -32,18 +31,7 @@ app.get('/recipe', async(req,res) => {
     res.send(500)
   }
 
-})
-/* 
-app.get("/recipe", async (req, res) => {
-  try {
-    const url = req.query.url;
-    const data = await scraper(url);
-    res.send(data).status(200)
-  } catch (error) {
-    console.log(error)
-    res.send(500)
-  }
-}) */
+});
 
 app.listen(PORT, () => {
     console.log("Server listening on Port", PORT);
