@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended : true}))
 
 app.get("/", (req,res) => {
-  res.send("Hello, World!").status(200)
+  res.send("Server is running").status(200)
 })
 
 // enter a supported recipe url as a parameter - returns a promise
