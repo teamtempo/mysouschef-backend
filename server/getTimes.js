@@ -1,7 +1,7 @@
 function getTimes(text) {
     const times = [["hr",3600], ["hour",3600], ["hours",3600], ["min",60],["mins",60], ["minute",60], ["minutes",60], ["sec",1], ["second",1], ["seconds",1]];
 
-    const splitText = text.split(/[ ,]+/)
+    const splitText = text.split(/[ ,;:.]+/)
     let number;
     let unit;
 

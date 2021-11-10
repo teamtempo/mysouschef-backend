@@ -15,8 +15,8 @@ app.get("/", (req,res) => {
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
-  try {
-    let recipeAllDetails = await recipeScraper(url);
+  recipeScraper(url)
+  .then((recipeAllDetails) => {
     recipeAllDetails.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
@@ -26,11 +26,12 @@ app.get('/recipe', async(req,res) => {
       recipe.push(obj);
     });
     res.send(recipe).status(200);
-  } catch (error) {
-    console.log(error)
-    res.send(500)
-  }
-
+  })
+  .catch(error => {
+    console.log(error.message);
+    res.send(error.message).status(500);
+    // => "No recipe found on page"
+  });
 });
 
 app.listen(PORT, () => {
