@@ -12,3 +12,11 @@ will return the following JSON
     }
 ]
 ```
+
+The below error messages may be displayed in place of data
+```
+"Failed to parse domain"
+"Site not yet supported"
+"No recipe found on page"
+"url provided must include '#subUrl'"
+```
