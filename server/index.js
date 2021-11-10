@@ -2,8 +2,6 @@ const express = require('express');
 const getTimes = require('./getTimes');
 const recipeScraper = require("recipe-scraper");
 
-
-
 const PORT = process.env.PORT || 5000;
 const app = express();
 
