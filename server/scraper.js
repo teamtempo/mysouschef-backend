@@ -45,6 +45,6 @@ async function scrapeData(url) {
     }
 }
 
-scrapeData('https://www.bbcgoodfood.com/recipes/strawberry-cheesecake-4-easy-steps')
+//scrapeData('https://www.bbcgoodfood.com/recipes/strawberry-cheesecake-4-easy-steps')
 
 module.exports = scrapeData;
