@@ -25,6 +25,7 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
+    recipe.unshift({title:recipeAllDetails.name})
     res.send(recipe).status(200);
   })
   .catch(error => {
