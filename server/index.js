@@ -15,11 +15,8 @@ app.get("/", (req,res) => {
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
-/*   recipeScraper("keyboard kitty").catch(error => {
-    console.log(error.message);
-    res.status(500).send(error.message)
-  }); */
-  const data = await recipeScraper(url)
+
+  await recipeScraper(url)
   .then(response => {
     response.instructions.forEach((step,index) => {
       const obj = {
@@ -29,13 +26,12 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
-    console.log(recipe)
-    res.send(recipe);
+    recipe.unshift({title:response.name})
+    res.send(recipe).status(200);
   })
   .catch(error => {
     console.log(error.message);
     res.status(500).send(error.message);
-    // => "No recipe found on page"
   })
 });
 
