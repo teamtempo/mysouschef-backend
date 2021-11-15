@@ -15,9 +15,13 @@ app.get("/", (req,res) => {
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
-  recipeScraper(url)
-  .then((recipeAllDetails) => {
-    recipeAllDetails.instructions.forEach((step,index) => {
+/*   recipeScraper("keyboard kitty").catch(error => {
+    console.log(error.message);
+    res.status(500).send(error.message)
+  }); */
+  const data = await recipeScraper(url)
+  .then(response => {
+    response.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
         details: step,
@@ -25,13 +29,14 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
-    res.send(recipe).status(200);
+    console.log(recipe)
+    res.send(recipe);
   })
   .catch(error => {
     console.log(error.message);
-    res.send(error.message).status(500);
+    res.status(500).send(error.message);
     // => "No recipe found on page"
-  });
+  })
 });
 
 app.listen(PORT, () => {
