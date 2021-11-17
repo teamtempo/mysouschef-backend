@@ -1,5 +1,5 @@
 const express = require('express');
-const getTimes = require('./getTimes');
+const { getTimes, getSteps } = require('./getTimes');
 const recipeScraper = require("recipe-scraper");
 
 const PORT = process.env.PORT || 5000;
@@ -15,9 +15,10 @@ app.get("/", (req,res) => {
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
-  recipeScraper(url)
-  .then((recipeAllDetails) => {
-    recipeAllDetails.instructions.forEach((step,index) => {
+
+  await recipeScraper(url)
+  .then(response => {
+    response.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
         details: step,
@@ -25,14 +26,14 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
-    recipe.unshift({title:recipeAllDetails.name})
+    recipe.unshift({ingredients:response.ingredients})
+    recipe.unshift({title:response.name})
     res.send(recipe).status(200);
   })
   .catch(error => {
     console.log(error.message);
-    res.send(error.message).status(500);
-    // => "No recipe found on page"
-  });
+    res.status(500).send(error.message);
+  })
 });
 
 app.listen(PORT, () => {
