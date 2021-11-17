@@ -4,13 +4,13 @@ function getTimes(text) {
     const splitText = text.split(/\s*\b\s*/)
     let number;
     let unit;
-    console.log(splitText)
+    //console.log(splitText)
     times.forEach((time) => {
         let pos = splitText.indexOf(time[0])
         if (pos > -1) {
-            console.log(splitText[pos-1])
+            //console.log(splitText[pos-1])
             if (typeof Number(splitText[pos-1]) === 'number') {
-                console.log(splitText[pos-1])
+                //console.log(splitText[pos-1])
                 number = (splitText[pos-1] * time[1]) 
             }
         }
@@ -18,4 +18,6 @@ function getTimes(text) {
     return number;
 }
 
-module.exports  = getTimes;
+module.exports  = {
+    getTimes: getTimes,
+}

@@ -1,5 +1,5 @@
 const express = require('express');
-const getTimes = require('./getTimes');
+const { getTimes, getSteps } = require('./getTimes');
 const recipeScraper = require("recipe-scraper");
 
 const PORT = process.env.PORT || 5000;
@@ -26,6 +26,7 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
+    recipe.unshift({ingredients:response.ingredients})
     recipe.unshift({title:response.name})
     res.send(recipe).status(200);
   })
