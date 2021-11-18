@@ -18,6 +18,7 @@ app.get('/recipe', async(req,res) => {
 
   await recipeScraper(url)
   .then(response => {
+    console.log(response)
     response.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
