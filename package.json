@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "recipe-scraper": "^2.1.1"
+    "recipe-scraper": "github:teamtempo/Recipe-Scraper"
   },
   "scripts": {
     "dev": "nodemon server/index.js",
