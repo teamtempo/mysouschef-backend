@@ -1,6 +1,7 @@
 const express = require('express');
 const { getTimes, getSteps } = require('./getTimes');
 const recipeScraper = require("recipe-scraper");
+const { converter } = require('./unitConversion');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -17,8 +18,8 @@ app.get('/recipe', async(req,res) => {
   const url = req.query.url;
 
   await recipeScraper(url)
-  .then(response => {
-    console.log(response)
+  .then(async (response) => {
+    //console.log(response)
     response.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
@@ -27,7 +28,8 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
-    recipe.unshift({ingredients:response.ingredients})
+    const ing = await converter(response.ingredients, 'metric');
+    recipe.unshift({ingredients:ing})
     recipe.unshift({title:response.name})
     res.send(recipe).status(200);
   })
