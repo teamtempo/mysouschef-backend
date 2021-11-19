@@ -14,10 +14,8 @@ async function converter(ingredients, toWhat) {
     await page.goto(url);
     await page.waitForSelector(textAreaInput);
     let input = await page.$(textAreaInput);
-    console.log(ingredients)
     await page.evaluate((el, ingredients) => el.value = ingredients, input, ingredients);
         
-      //  (el, ing) => el.value = ing, (input, ingredients));
     await page.click('button.btn-primary'); 
     await page.waitForSelector(textAreaOutput);
     let text = await page.$(textAreaOutput);

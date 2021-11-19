@@ -16,10 +16,10 @@ app.get("/", (req,res) => {
 app.get('/recipe', async(req,res) => {
   const recipe = [];
   const url = req.query.url;
+  const unit = req.query.unit;
 
   await recipeScraper(url)
-  .then(async (response) => {
-    //console.log(response)
+  .then(async function(response) {
     response.instructions.forEach((step,index) => {
       const obj = {
         step: index+1,
@@ -28,7 +28,7 @@ app.get('/recipe', async(req,res) => {
       }
       recipe.push(obj);
     });
-    const ing = await converter(response.ingredients, 'metric');
+    const ing = await converter(response.ingredients, unit);
     recipe.unshift({ingredients:ing})
     recipe.unshift({title:response.name})
     res.send(recipe).status(200);
