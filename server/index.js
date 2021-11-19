@@ -29,7 +29,7 @@ app.get('/recipe', async(req,res) => {
       recipe.push(obj);
     });
     const ing = await converter(response.ingredients, unit);
-    recipe.unshift({ingredients:ing})
+    recipe.unshift({ingredients:ing.split("\n")})
     recipe.unshift({title:response.name})
     res.send(recipe).status(200);
   })
